@@ -81,7 +81,7 @@ const Hero: React.FC = () => {
         animate="visible"
       >
         <motion.div
-          className="flex flex-col gap-6 md:gap-8 items-center lg:items-start text-center lg:text-left"
+          className="flex flex-col p-8 sm:p-12 gap-6 sm:gap-8 items-center lg:items-start text-center lg:text-left"
           variants={itemVariants}
         >
           <motion.h1

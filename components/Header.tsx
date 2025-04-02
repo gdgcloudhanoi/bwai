@@ -37,9 +37,9 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <motion.div className="h-12 sm:h-16 flex items-center justify-center p-4 sm:p-8 md:p-20 font-[family-name:var(--font-geist-sans)]">
+      <motion.div className="w-full flex items-center sm:items-start justify-center p-8 sm:p-12 font-[family-name:var(--font-geist-sans)]">
         <motion.div
-          className="flex gap-8 md:gap-12 items-center max-w-7xl w-full relative z-10"
+          className="flex gap-8 md:gap-12 items-center sm:items-start justify-center max-w-7xl w-full relative z-10"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -57,7 +57,7 @@ const Header: React.FC = () => {
       </motion.div>
       <div className="sm:hidden">
         <Drawer>
-          <DrawerTrigger>Open</DrawerTrigger>
+          <DrawerTrigger></DrawerTrigger>
           <DrawerContent>
             <DrawerHeader>
               <DrawerTitle>Are you absolutely sure?</DrawerTitle>
