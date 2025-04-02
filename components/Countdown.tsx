@@ -57,7 +57,7 @@ const Countdown = ({ targetDate, timezone }: CountdownProps) => {
   ];
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 justify-center items-center gap-4 sm:gap-6">
+    <div className="flex justify-center items-center gap-4 sm:gap-6">
       <AnimatePresence>
         {timeUnits.map((unit) => (
           <motion.div

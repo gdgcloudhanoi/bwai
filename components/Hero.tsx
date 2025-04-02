@@ -4,8 +4,13 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Countdown from "./Countdown";
 
+type ImageProp = {
+  src: string;
+  alt: string;
+};
+
 // Fisher-Yates shuffle function
-const shuffleArray = (array) => {
+const shuffleArray = (array: ImageProp[]) => {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
