@@ -105,8 +105,8 @@ const Hero: React.FC = () => {
           </motion.p>
 
           <TimeWindow
-            startTime="2025-04-04T03:55:30"
-            endTime="2025-04-04T04:05:00"
+            startTime="2025-04-01T00:00:00"
+            endTime="2025-04-05T08:29:59"
             timezone="Asia/Ho_Chi_Minh"
           >
             <div className="flex flex-col">
@@ -121,8 +121,8 @@ const Hero: React.FC = () => {
           </TimeWindow>
 
           <TimeWindow
-            startTime="2025-04-04T04:05:00"
-            endTime="2025-04-04T04:08:30"
+            startTime="2025-04-05T08:30:00"
+            endTime="2025-04-05T11:59:59"
             timezone="Asia/Ho_Chi_Minh"
           >
             <div className="flex flex-col">
