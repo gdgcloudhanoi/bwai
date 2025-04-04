@@ -35,9 +35,16 @@ const Countdown = ({ targetDate, timezone }: CountdownProps) => {
     };
   };
 
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true); // Mark as mounted on the client
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
@@ -50,11 +57,31 @@ const Countdown = ({ targetDate, timezone }: CountdownProps) => {
   };
 
   const timeUnits = [
-    { value: timeLeft.days, label: "Days" },
-    { value: timeLeft.hours, label: "Hours" },
-    { value: timeLeft.minutes, label: "Minutes" },
-    { value: timeLeft.seconds, label: "Seconds" },
+    { value: timeLeft.days, label: "Ngày" },
+    { value: timeLeft.hours, label: "Giờ" },
+    { value: timeLeft.minutes, label: "Phút" },
+    { value: timeLeft.seconds, label: "Giây" },
   ];
+
+  // Render nothing or a placeholder until mounted
+  if (!isMounted) {
+    return (
+      <div className="flex justify-center items-center gap-4 sm:gap-6">
+        {timeUnits.map((unit) => (
+          <div key={unit.label} className="flex flex-col items-center">
+            <div className="bg-gray-800 rounded-lg p-4 sm:p-6 w-16 sm:w-24 shadow-lg">
+              <span className="text-2xl sm:text-3xl font-mono text-white block text-center">
+                00
+              </span>
+            </div>
+            <span className="text-gray-400 text-sm sm:text-base mt-2">
+              {unit.label}
+            </span>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="flex justify-center items-center gap-4 sm:gap-6">

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Countdown from "./Countdown";
+import { TimeWindow } from "./TimeWindow";
 
 type ImageProp = {
   src: string;
@@ -73,7 +74,10 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <motion.div className="min-h-screen flex items-center justify-center p-4 sm:p-8 md:p-20 font-[family-name:var(--font-geist-sans)]">
+    <motion.div
+      id="home"
+      className="min-h-screen flex items-center justify-center p-4 sm:p-8 md:p-20 font-[family-name:var(--font-geist-sans)]"
+    >
       <motion.div
         className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center max-w-7xl w-full relative z-10"
         variants={containerVariants}
@@ -95,16 +99,42 @@ const Hero: React.FC = () => {
             className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-md"
             variants={itemVariants}
           >
-            Learn to build next-gen AI applications at the Build with AI Hanoi
-            2025, with expert-led sessions and practical experience.
+            Build with AI Hanoi 2025 mang đến cơ hội học hỏi và thực hành xây
+            dựng các ứng dụng AI tiên tiến, dưới sự hướng dẫn của các chuyên gia
+            đầu ngành.
           </motion.p>
 
-          <motion.div variants={itemVariants}>
-            <Countdown
-              targetDate="2025-04-05T08:29:59"
-              timezone="Asia/Ho_Chi_Minh"
-            />
-          </motion.div>
+          <TimeWindow
+            startTime="2025-04-04T03:55:30"
+            endTime="2025-04-04T04:05:00"
+            timezone="Asia/Ho_Chi_Minh"
+          >
+            <div className="flex flex-col">
+              <p className="font-semibold text-base sm:text-lg text-gray-600 dark:text-gray-300 mb-4">
+                Sự kiện sẽ bắt đầu sau
+              </p>
+              <Countdown
+                targetDate="2025-04-05T08:29:59"
+                timezone="Asia/Ho_Chi_Minh"
+              />
+            </div>
+          </TimeWindow>
+
+          <TimeWindow
+            startTime="2025-04-04T04:05:00"
+            endTime="2025-04-04T04:08:30"
+            timezone="Asia/Ho_Chi_Minh"
+          >
+            <div className="flex flex-col">
+              <p className="font-semibold text-base sm:text-lg text-gray-600 dark:text-gray-300 mb-4">
+                Sự kiện sẽ kết thúc sau
+              </p>
+              <Countdown
+                targetDate="2025-04-05T11:59:59"
+                timezone="Asia/Ho_Chi_Minh"
+              />
+            </div>
+          </TimeWindow>
         </motion.div>
 
         <motion.div
