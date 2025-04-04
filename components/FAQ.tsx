@@ -81,7 +81,8 @@ export default function FAQ() {
                       transition={{ delay: 0.2, duration: 1, ease }}
                     >
                       <VideoPlayer
-                        hlsSrc="/videos/credit/playlist.m3u8"
+                        hlsSrc="https://storage.googleapis.com/gdg-cloud-hanoi/videos/how-to-get-gcp-credit-bwaic-2025/playlist.m3u8"
+                        // hlsSrc="/videos/credit/playlist.m3u8"
                         thumbnailSrc="/mockups/preview_1.jpg"
                         thumbnailAlt="Hero Video"
                         className="border rounded-lg shadow-lg max-w-screen-lg"
