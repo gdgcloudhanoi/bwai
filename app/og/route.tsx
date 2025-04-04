@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const postTitle = searchParams.get("title") || "GDG Cloud Hanoi";
   const font = fetch(
-    new URL("/fonts/GoogleSans-Medium.ttf", import.meta.url)
+    new URL(`${process.env.NEXT_PUBLIC_SITE_URL}/fonts/GoogleSans-Medium.ttf`, import.meta.url)
   ).then((res) => res.arrayBuffer());
   const fontData = await font;
 
