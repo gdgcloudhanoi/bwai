@@ -44,7 +44,24 @@ const googleSans = localFont({
 
 export const metadata: Metadata = {
   title: "Build with AI Cloud Hanoi 2025",
-  description: "By GDG Cloud Hanoi"
+  description: "By GDG Cloud Hanoi",
+  keywords: ["AI", "Cloud", "GDG", "Hanoi", "Google"],
+    openGraph: {
+      title: "Build with AI Cloud Hanoi 2025",
+      description: "By GDG Cloud Hanoi",
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}`,
+      siteName: "Build with AI Cloud Hanoi 2025",
+      images: [
+        {
+          url: `${process.env.NEXT_PUBLIC_APP_URL}/og`,
+          width: 1200,
+          height: 630,
+          alt: "Build with AI Cloud Hanoi 2025",
+        },
+      ],
+      type: "website",
+      locale: "vi_VN",
+    },
 };
 
 export default function RootLayout({

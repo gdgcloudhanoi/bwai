@@ -138,7 +138,7 @@ const Hero: React.FC = () => {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-12 gap-4 h-[400px] sm:h-[500px] md:h-[600px] w-full max-w-2xl mx-auto lg:mx-0"
+          className="grid grid-cols-12 gap-2 sm:gap-4 h-[400px] sm:h-[500px] md:h-[600px] w-full max-w-2xl mx-auto lg:mx-0"
           variants={itemVariants}
         >
           {layout.map((item, index) => (
