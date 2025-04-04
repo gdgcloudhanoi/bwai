@@ -94,7 +94,7 @@ export default function FAQ() {
               <AccordionItem
                 key={2}
                 value="item-2"
-                className="w-full border rounded-lg"
+                className="w-full border rounded-lg bg-white"
               >
                 <AccordionTrigger className="text-start px-4">
                   Làm sao để tạo API Key trong Google AI Studio?
@@ -155,7 +155,7 @@ export default function FAQ() {
               <AccordionItem
                 key={3}
                 value="item-3"
-                className="w-full border rounded-lg"
+                className="w-full border rounded-lg bg-white"
               >
                 <AccordionTrigger className="text-start px-4">
                   Làm sao cài API Key trong Google Colab Notebook?
