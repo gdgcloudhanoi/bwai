@@ -226,7 +226,7 @@ export default function Gallery() {
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                       }}
-                      className="text-justify font-semibold"
+                      className="font-semibold"
                     >
                       {image.ai_description}
                     </p>

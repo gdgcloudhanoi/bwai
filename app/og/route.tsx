@@ -7,12 +7,10 @@ export async function GET() {
     (
       <img
         src={`${process.env.NEXT_PUBLIC_SITE_URL}/preview.jpg`}
-        width={900}
         style={{
           position: "relative",
           bottom: -160,
           aspectRatio: "auto",
-          border: "4px solid lightgray",
           background: "lightgray",
           borderRadius: 20,
           zIndex: 1,

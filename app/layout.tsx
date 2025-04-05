@@ -43,6 +43,7 @@ const googleSans = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || ""),
   title: "Build with AI Cloud Hanoi 2025",
   description: "By GDG Cloud Hanoi",
   keywords: ["AI", "Cloud", "GDG", "Hanoi", "Google"],
