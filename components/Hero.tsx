@@ -55,16 +55,12 @@ const Hero: React.FC = () => {
   ];
 
   // Image content to shuffle
-  const imageContent = [
-    { src: "/featured/featured_1.jpg", alt: "Feature 1" },
-    { src: "/featured/featured_2.jpg", alt: "Feature 2" },
-    { src: "/featured/featured_3.jpg", alt: "Feature 3" },
-    { src: "/featured/featured_4.jpg", alt: "Feature 4" },
-    { src: "/featured/featured_5.jpg", alt: "Feature 5" },
-    { src: "/featured/featured_6.jpg", alt: "Feature 6" },
-    { src: "/featured/featured_7.jpg", alt: "Feature 7" },
-    { src: "/featured/featured_8.jpg", alt: "Feature 8" },
-  ];
+  const imageContent = Array.from({ length: 8 }, (_, index) => ({
+    src: `https://storage.googleapis.com/gdg-cloud-hanoi/featured_${
+      index + 1
+    }_preview_optimized.jpg`,
+    alt: `Feature ${index + 1}`,
+  }));
 
   const [shuffledImages, setShuffledImages] = useState(imageContent);
 
