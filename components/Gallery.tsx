@@ -4,7 +4,14 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { firestore } from "@/lib/firebase";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { X, ChevronLeft, ChevronRight, XIcon } from "lucide-react";
+import {
+  X,
+  ChevronLeft,
+  ChevronRight,
+  XIcon,
+  LinkIcon,
+  Link2Icon,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -16,6 +23,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { OptimizedImage } from "@/lib/types";
 import { FacebookIcon, LinkedinIcon, MessageCircleIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface GalleryProps {
   initialName?: string; // Optional prop for the initial image name
@@ -318,7 +326,7 @@ export default function Gallery({ initialName }: GalleryProps) {
                     <Button variant="outline" size="sm" asChild>
                       <a
                         href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                          `${process.env.NEXT_PUBLIC_SITE_URL}/gallery/${selectedImage.optimizedName}`
+                          `${process.env.NEXT_PUBLIC_SITE_URL}gallery/${selectedImage.optimizedName}`
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -326,25 +334,11 @@ export default function Gallery({ initialName }: GalleryProps) {
                         <FacebookIcon className="h-4 w-4" />
                       </a>
                     </Button>
-                    <Button variant="outline" size="sm" asChild>
-                      <a
-                        href={`https://www.facebook.com/dialog/send?link=${encodeURIComponent(
-                          `${process.env.NEXT_PUBLIC_SITE_URL}/gallery/${selectedImage.optimizedName}`
-                        )}&app_id=${
-                          process.env.NEXT_PUBLIC_FACEBOOK_APP_ID
-                        }&redirect_uri=${encodeURIComponent(
-                          `${process.env.NEXT_PUBLIC_SITE_URL}/gallery`
-                        )}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <MessageCircleIcon className="h-4 w-4" />
-                      </a>
-                    </Button>
+
                     <Button variant="outline" size="sm" asChild>
                       <a
                         href={`https://www.linkedin.com/shareArticle?url=${encodeURIComponent(
-                          `${process.env.NEXT_PUBLIC_SITE_URL}/gallery/${selectedImage.optimizedName}`
+                          `${process.env.NEXT_PUBLIC_SITE_URL}gallery/${selectedImage.optimizedName}`
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -355,7 +349,7 @@ export default function Gallery({ initialName }: GalleryProps) {
                     <Button variant="outline" size="sm" asChild>
                       <a
                         href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
-                          `${process.env.NEXT_PUBLIC_SITE_URL}/gallery/${selectedImage.optimizedName}`
+                          `${process.env.NEXT_PUBLIC_SITE_URL}gallery/${selectedImage.optimizedName}`
                         )}&text=${encodeURIComponent(
                           selectedImage.ai_description ||
                             selectedImage.originalName
@@ -365,6 +359,18 @@ export default function Gallery({ initialName }: GalleryProps) {
                       >
                         <XIcon className="h-4 w-4" />
                       </a>
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          `${process.env.NEXT_PUBLIC_SITE_URL}gallery/${selectedImage.optimizedName}`
+                        );
+                        toast("URL copied!");
+                      }}
+                      variant="outline"
+                      size="sm"
+                    >
+                      <Link2Icon className="h-4 w-4" />
                     </Button>
                   </div>
 
