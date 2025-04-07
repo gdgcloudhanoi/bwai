@@ -5,15 +5,15 @@ import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 import Gallery from "@/components/Gallery";
 import Link from "next/link";
-import { ArrowLeftCircleIcon } from "lucide-react";
+import { ArrowLeftIcon, ChevronLeftIcon } from "lucide-react";
 
 export default function Page() {
   return (
     <div className="flex flex-col">
       <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
         <nav className="container max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link className="flex gap-2" href="/">
-            <ArrowLeftCircleIcon />
+          <Link className="flex gap-2 font-semibold" href="/">
+            <ChevronLeftIcon />
             Trang chủ
           </Link>
           <motion.div
