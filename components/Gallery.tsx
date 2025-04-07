@@ -4,34 +4,24 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { firestore } from "@/lib/firebase";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, XIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Skeleton } from "@/components/ui/skeleton";
+import { OptimizedImage } from "@/lib/types";
+import { FacebookIcon, LinkedinIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-interface QA {
-  question: string;
-  answer: string;
+interface GalleryProps {
+  initialName?: string; // Optional prop for the initial image name
 }
 
-interface OptimizedImage {
-  id: string;
-  optimizedBucket: string;
-  optimizedName: string;
-  previewName: string;
-  originalName: string;
-  originalSize?: number;
-  createdAt?: string;
-  ai_description: string;
-  qa?: QA[];
-}
-
-export default function Gallery() {
+export default function Gallery({ initialName }: GalleryProps) {
   const [images, setImages] = useState<OptimizedImage[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -40,7 +30,7 @@ export default function Gallery() {
   );
   const [selectedImage, setSelectedImage] = useState<OptimizedImage | null>(
     null
-  ); // New state for the selected image
+  );
 
   const layout = [
     { span: "col-span-1 row-span-1" },
@@ -53,7 +43,6 @@ export default function Gallery() {
     { span: "col-span-1 row-span-1" },
     { span: "col-span-1 row-span-1" },
     { span: "col-span-1 row-span-1" },
-
     { span: "col-span-1 row-span-1 sm:col-span-2 sm:row-span-2" },
     { span: "col-span-1 row-span-1" },
     { span: "col-span-2 row-span-2 sm:col-span-1 sm:row-span-1" },
@@ -80,25 +69,19 @@ export default function Gallery() {
           ...doc.data(),
         })) as OptimizedImage[];
 
-        // Only update images if no image is selected (modal is closed)
-        if (selectedImageIndex === null) {
-          setImages(imagesList);
-        } else {
-          // If an image is selected, update the list but keep the current selected image
-          setImages((prevImages) => {
-            const currentImage = prevImages[selectedImageIndex];
-            const updatedImages = imagesList;
-            const currentImageStillExists = updatedImages.some(
-              (img) => img.id === currentImage?.id
-            );
-            if (!currentImageStillExists) {
-              // If the current image was deleted, close the modal
-              setSelectedImageIndex(null);
-              setSelectedImage(null);
-            }
-            return updatedImages;
-          });
+        setImages(imagesList);
+
+        // If initialName is provided, set the selected image based on it
+        if (initialName && !selectedImageIndex) {
+          const index = imagesList.findIndex(
+            (img) => img.optimizedName === initialName
+          );
+          if (index !== -1) {
+            setSelectedImageIndex(index);
+            setSelectedImage(imagesList[index]);
+          }
         }
+
         setLoading(false);
       },
       (err) => {
@@ -109,13 +92,12 @@ export default function Gallery() {
     );
 
     return () => unsubscribe();
-  }, [selectedImageIndex]);
+  }, [initialName, selectedImageIndex]);
 
-  // Handle selecting an image
   const handleImageSelect = useCallback(
     (index: number) => {
       setSelectedImageIndex(index);
-      setSelectedImage(images[index]); // Store the selected image separately
+      setSelectedImage(images[index]);
     },
     [images]
   );
@@ -157,18 +139,24 @@ export default function Gallery() {
     exit: { opacity: 0, transition: { duration: 0.2 } },
   };
 
-  if (loading)
+  const router = useRouter();
+
+  if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="w-8 h-8 border-4 border-t-transparent border-blue-500 rounded-full"
-        />
+      <div className="w-full">
+        <div className="grid grid-cols-4 sm:grid-cols-8 gap-1">
+          {layout.slice(0, 50).map((item, index) => (
+            <Skeleton
+              key={index}
+              className={`aspect-square ${item.span} bg-gray-200`}
+            />
+          ))}
+        </div>
       </div>
     );
+  }
 
-  if (error)
+  if (error) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <motion.p
@@ -180,16 +168,10 @@ export default function Gallery() {
         </motion.p>
       </div>
     );
+  }
 
   return (
-    <div id="gallery" className="w-full">
-      <div className="relative container mx-auto px-4 py-16 max-w-7xl">
-        <div className="text-center space-y-4 pb-6 mx-auto">
-          <h3 className="mx-auto mt-4 max-w-xs text-2xl font-semibold sm:max-w-none sm:text-4xl md:text-5xl">
-            Thư viện ảnh
-          </h3>
-        </div>
-      </div>
+    <div className="w-full">
       <AnimatePresence>
         {images.length === 0 ? (
           <></>
@@ -206,7 +188,7 @@ export default function Gallery() {
                 className={`group relative aspect-square overflow-hidden cursor-pointer ${
                   layout[index % layout.length].span
                 }`}
-                onClick={() => handleImageSelect(index)} // Updated to use new handler
+                onClick={() => handleImageSelect(index)}
               >
                 <Image
                   src={`https://storage.googleapis.com/${image.optimizedBucket}/${image.previewName}`}
@@ -272,21 +254,26 @@ export default function Gallery() {
                   variant="ghost"
                   size="icon"
                   className="absolute top-4 right-4 text-white hover:bg-white/20 z-10"
-                  onClick={handleClose}
+                  onClick={!initialName ? handleClose : () => {
+                    router.push("/gallery");
+                  }}
                 >
                   <X className="h-6 w-6" />
                 </Button>
-                {selectedImageIndex !== null && selectedImageIndex > 0 && (
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:bg-white/20 z-10"
-                    onClick={handlePrev}
-                  >
-                    <ChevronLeft className="h-8 w-8" />
-                  </Button>
-                )}
-                {selectedImageIndex !== null &&
+                {!initialName &&
+                  selectedImageIndex !== null &&
+                  selectedImageIndex > 0 && (
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:bg-white/20 z-10"
+                      onClick={handlePrev}
+                    >
+                      <ChevronLeft className="h-8 w-8" />
+                    </Button>
+                  )}
+                {!initialName &&
+                  selectedImageIndex !== null &&
                   selectedImageIndex < images.length - 1 && (
                     <Button
                       variant="ghost"
@@ -320,6 +307,48 @@ export default function Gallery() {
                         "No description available"}
                     </p>
                   </div>
+
+                  {/* Share Buttons */}
+                  <div className="flex gap-2">
+                    <div className="flex-1"></div>
+                    <Button variant="outline" size="sm" asChild>
+                      <a
+                        href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                          `${process.env.NEXT_PUBLIC_SITE_URL}/gallery/${selectedImage.optimizedName}`
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FacebookIcon className="h-4 w-4" />
+                      </a>
+                    </Button>
+                    <Button variant="outline" size="sm" asChild>
+                      <a
+                        href={`https://www.linkedin.com/shareArticle?url=${encodeURIComponent(
+                          `${process.env.NEXT_PUBLIC_SITE_URL}/gallery/${selectedImage.optimizedName}`
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <LinkedinIcon className="h-4 w-4" />
+                      </a>
+                    </Button>
+                    <Button variant="outline" size="sm" asChild>
+                      <a
+                        href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                          `${process.env.NEXT_PUBLIC_SITE_URL}/gallery/${selectedImage.optimizedName}`
+                        )}&text=${encodeURIComponent(
+                          selectedImage.ai_description ||
+                            selectedImage.originalName
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <XIcon className="h-4 w-4" />
+                      </a>
+                    </Button>
+                  </div>
+
                   <div>
                     {selectedImage.qa && selectedImage.qa.length > 0 ? (
                       <div className="space-y-2">

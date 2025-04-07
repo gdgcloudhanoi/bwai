@@ -6,18 +6,24 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useScroll } from "@/components/ScrollContext";
+import { useRouter } from "next/navigation";
 
 const navItems = [
   { name: "Hỏi đáp", id: "faq" },
-  { name: "Thư viện ảnh", id: "gallery" },
+  { name: "Thư viện ảnh", id: "gallery", url: "/gallery" },
 ];
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollToSection } = useScroll();
+  const router = useRouter();
 
-  const handleScroll = (id: string) => {
-    scrollToSection(id);
+  const handleScroll = (id: string, url?: string) => {
+    if (url) {
+      router.push(url); // Navigate to the URL if it exists
+    } else {
+      scrollToSection(id); // Scroll to section if no URL
+    }
     setIsMobileMenuOpen(false);
   };
 
@@ -69,7 +75,7 @@ const Header = () => {
               <Button
                 variant="ghost"
                 className="text-gray-700 hover:text-blue-600 transition-colors"
-                onClick={() => handleScroll(item.id)}
+                onClick={() => handleScroll(item.id, item.url)}
               >
                 {item.name}
               </Button>
@@ -118,7 +124,7 @@ const Header = () => {
               key={item.id}
               variant="ghost"
               className="w-full text-left text-gray-700 hover:text-blue-600"
-              onClick={() => handleScroll(item.id)}
+              onClick={() => handleScroll(item.id, item.url)}
             >
               {item.name}
             </Button>
