@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/accordion";
 import { Skeleton } from "@/components/ui/skeleton";
 import { OptimizedImage } from "@/lib/types";
-import { FacebookIcon, LinkedinIcon } from "lucide-react";
+import { FacebookIcon, LinkedinIcon, MessageCircleIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface GalleryProps {
@@ -254,9 +254,13 @@ export default function Gallery({ initialName }: GalleryProps) {
                   variant="ghost"
                   size="icon"
                   className="absolute top-4 right-4 text-white hover:bg-white/20 z-10"
-                  onClick={!initialName ? handleClose : () => {
-                    router.push("/gallery");
-                  }}
+                  onClick={
+                    !initialName
+                      ? handleClose
+                      : () => {
+                          router.push("/gallery");
+                        }
+                  }
                 >
                   <X className="h-6 w-6" />
                 </Button>
@@ -320,6 +324,21 @@ export default function Gallery({ initialName }: GalleryProps) {
                         rel="noopener noreferrer"
                       >
                         <FacebookIcon className="h-4 w-4" />
+                      </a>
+                    </Button>
+                    <Button variant="outline" size="sm" asChild>
+                      <a
+                        href={`https://www.facebook.com/dialog/send?link=${encodeURIComponent(
+                          `${process.env.NEXT_PUBLIC_SITE_URL}/gallery/${selectedImage.optimizedName}`
+                        )}&app_id=${
+                          process.env.NEXT_PUBLIC_FACEBOOK_APP_ID
+                        }&redirect_uri=${encodeURIComponent(
+                          `${process.env.NEXT_PUBLIC_SITE_URL}/gallery`
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <MessageCircleIcon className="h-4 w-4" />
                       </a>
                     </Button>
                     <Button variant="outline" size="sm" asChild>
