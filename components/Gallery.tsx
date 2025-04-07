@@ -4,14 +4,7 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { firestore } from "@/lib/firebase";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import {
-  X,
-  ChevronLeft,
-  ChevronRight,
-  XIcon,
-  LinkIcon,
-  Link2Icon,
-} from "lucide-react";
+import { X, ChevronLeft, ChevronRight, XIcon, Link2Icon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -21,7 +14,7 @@ import {
 } from "@/components/ui/accordion";
 import { Skeleton } from "@/components/ui/skeleton";
 import { OptimizedImage } from "@/lib/types";
-import { FacebookIcon, LinkedinIcon, MessageCircleIcon } from "lucide-react";
+import { FacebookIcon, LinkedinIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -41,6 +34,26 @@ export default function Gallery({ initialName }: GalleryProps) {
   );
 
   const layout = [
+    { span: "col-span-1 row-span-1" },
+    { span: "col-span-1 row-span-1" },
+    { span: "col-span-2 row-span-2" },
+    { span: "col-span-1 row-span-1" },
+    { span: "col-span-1 row-span-1" },
+    { span: "col-span-2 row-span-2" },
+    { span: "col-span-1 row-span-1" },
+    { span: "col-span-1 row-span-1" },
+    { span: "col-span-1 row-span-1" },
+    { span: "col-span-1 row-span-1" },
+    { span: "col-span-1 row-span-1 sm:col-span-2 sm:row-span-2" },
+    { span: "col-span-1 row-span-1" },
+    { span: "col-span-2 row-span-2 sm:col-span-1 sm:row-span-1" },
+    { span: "col-span-1 row-span-1 sm:col-span-2 sm:row-span-2" },
+    { span: "col-span-1 row-span-1" },
+    { span: "col-span-2 row-span-2 sm:col-span-1 sm:row-span-1" },
+    { span: "col-span-1 row-span-1" },
+    { span: "col-span-1 row-span-1" },
+    { span: "col-span-1 row-span-1" },
+    { span: "col-span-1 row-span-1" },
     { span: "col-span-1 row-span-1" },
     { span: "col-span-1 row-span-1" },
     { span: "col-span-2 row-span-2" },
@@ -156,7 +169,7 @@ export default function Gallery({ initialName }: GalleryProps) {
           {layout.slice(0, 50).map((item, index) => (
             <Skeleton
               key={index}
-              className={`aspect-square ${item.span} bg-gray-200`}
+              className={`aspect-square ${item.span} bg-gray-200 rounded-none`}
             />
           ))}
         </div>
