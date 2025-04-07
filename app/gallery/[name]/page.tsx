@@ -14,7 +14,7 @@ export async function generateMetadata({
   // Assume a default bucket name or get it from an environment variable
   const bucketName = "gdg-cloud-hanoi";
   const imageUrl = `https://storage.googleapis.com/${bucketName}/${name}`;
-  const title = `Build with AI Cloud Hanoi 2025`;
+  const title = `Gallery | Build with AI Cloud Hanoi 2025`;
   const description = `View your images in our gallery.`;
   const canonicalUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/gallery/${name}`;
 
