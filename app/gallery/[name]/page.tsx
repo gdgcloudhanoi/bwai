@@ -14,8 +14,8 @@ export async function generateMetadata({
   // Assume a default bucket name or get it from an environment variable
   const bucketName = process.env.NEXT_PUBLIC_GCS_BUCKET || "your-default-bucket";
   const imageUrl = `https://storage.googleapis.com/${bucketName}/${name}`;
-  const title = `${name} - Gallery`;
-  const description = `View the ${name} image in our gallery.`;
+  const title = `Build with AI Cloud Hanoi 2025`;
+  const description = `View your images in our gallery.`;
   const canonicalUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/gallery/${name}`;
 
   return {
@@ -57,7 +57,7 @@ export default async function GalleryPage({
   const name = resolvedParams.name;
 
   // Assume a default bucket name or get it from an environment variable
-  const bucketName = process.env.NEXT_PUBLIC_GCS_BUCKET || "your-default-bucket";
+  const bucketName = "gdg-cloud-hanoi";
   const imageUrl = `https://storage.googleapis.com/${bucketName}/${name}`;
 
   return (
