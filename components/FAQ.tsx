@@ -83,7 +83,7 @@ export default function FAQ() {
                       <VideoPlayer
                         hlsSrc="https://storage.googleapis.com/gdg-cloud-hanoi/videos/how-to-get-gcp-credit-bwaic-2025/playlist.m3u8"
                         // hlsSrc="/videos/credit/playlist.m3u8"
-                        thumbnailSrc="/mockups/preview_1.jpg"
+                        thumbnailSrc="/preview.jpg"
                         thumbnailAlt="Hero Video"
                         className="border rounded-lg shadow-lg max-w-screen-lg"
                       />
@@ -197,7 +197,6 @@ export default function FAQ() {
                   </div>
                 </AccordionContent>
               </AccordionItem>
-
             </Accordion>
           </div>
           <h4 className="mb-12 text-center text-sm font-medium tracking-tight text-foreground/80">
