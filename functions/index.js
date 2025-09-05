@@ -282,7 +282,7 @@ exports.optimizer_dev = onObjectFinalized(
 
       // Initialize and use Google Generative AI
       const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
       const mimeType = MIME_TYPES[fileExtension] || "image/jpeg";
 
@@ -297,7 +297,7 @@ exports.optimizer_dev = onObjectFinalized(
       let responseText = "";
       try {
         const result = await model.generateContent([
-          "Mô tả bức ảnh trên (tối đa 50 từ) bằng tiếng Việt.",
+          "Describe the above picture (maximum 50 words) in English.",
           image,
         ]);
         responseText = result.response.text();
@@ -333,7 +333,7 @@ exports.optimizer_dev = onObjectFinalized(
             {
               parts: [
                 {
-                  text: `Đặt 10 câu hỏi cho bức ảnh trên và trả về kết quả bằng tiếng Việt dưới dạng JSON với cấu trúc: {"questions": ["câu hỏi 1", "câu hỏi 2", "câu hỏi 3"]}`,
+                  text: `Set 10 questions for the picture above and return the result in English in JSON format with the structure: {"questions": ["question 1", "question 2", "question 3"]}`,
                 },
                 image,
               ],
@@ -355,7 +355,7 @@ exports.optimizer_dev = onObjectFinalized(
         questions.map(async (question) => {
           try {
             const answerRes = await model.generateContent([
-              `Trả lời câu hỏi sau bằng tiếng Việt dựa trên bức ảnh: "${question}"`,
+              `Answer the following question in English based on the picture: "${question}"`,
               image,
             ]);
             return {
