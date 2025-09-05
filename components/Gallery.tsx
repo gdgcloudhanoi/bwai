@@ -407,7 +407,7 @@ export default function Gallery({ initialName }: GalleryProps) {
                       <p>No Q&A available</p>
                     )}
                     <p className="text-end text-sm text-gray-500 mt-8">
-                      được tạo bởi <strong>Gemini 2.0 Flash</strong>
+                      Powered by <strong>Gemini 2.5 Flash</strong>
                     </p>
                   </div>
                 </motion.div>
