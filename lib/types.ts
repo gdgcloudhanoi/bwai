@@ -1,4 +1,3 @@
-// src/types.ts (or similar shared location)
 export interface QA {
   question: string;
   answer: string;

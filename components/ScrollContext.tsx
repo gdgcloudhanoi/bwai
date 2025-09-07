@@ -21,7 +21,7 @@ export const ScrollProvider = ({ children }: { children: React.ReactNode }) => {
     if (!isMounted) return;
     const element = document.getElementById(id);
     if (element) {
-      const headerOffset = 80; // Adjust based on your header height
+      const headerOffset = 80;
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
       const offsetPosition = elementPosition - headerOffset;
 
@@ -30,7 +30,6 @@ export const ScrollProvider = ({ children }: { children: React.ReactNode }) => {
         behavior: "smooth",
       });
 
-      // Force a slight delay to ensure mobile browsers adjust
       setTimeout(() => {
         window.scrollTo({
           top: offsetPosition,

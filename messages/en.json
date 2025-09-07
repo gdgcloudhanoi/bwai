@@ -1,0 +1,51 @@
+{
+  "en": "English",
+  "vi": "Tiếng Việt",
+  "home": "Home",
+  "faq": "FAQ",
+  "gallery": "Gallery",
+  "hero": {
+    "title": "Build with AI Cloud Hanoi 2025",
+    "description": "Build with AI Hanoi 2025 brings opportunities to learn and practice building advanced AI applications under the guidance of industry experts.",
+    "thumbnailAlt": "Hero Video",
+    "countdownStartsIn": "The event will start in",
+    "countdownEndsIn": "The event will end in",
+    "watchVideo": "Recap Video"
+  }
+  ,
+  "faqSection": {
+    "title": "FAQ",
+    "q1": {
+      "title": "How to get Google Cloud credit?",
+      "step1": "Go to trygcp.dev to claim credits (the organizers will share the exact link during the event).",
+      "step2": "Sign in to your Google account, then choose \"CLICK HERE TO ACCESS YOUR CREDIT\".",
+      "step3": "Accept the terms and conditions and continue to complete.",
+      "step4": {
+        "prefix": "You can check your credits in",
+        "suffix": "in",
+        "console": "Google Cloud Console"
+      },
+      "videoAlt": "How to get Google Cloud credit"
+    },
+    "q2": {
+      "title": "How to create an API Key in Google AI Studio?",
+      "step1": "Visit",
+      "googleAiStudio": "Google AI Studio",
+      "step2": "Choose \"Create API key\".",
+      "step3": "Select a Google Cloud Project (or create a new one if you don't have one), then click Create.",
+      "step4": "Save the API key to use in the labs.",
+      "imageAlt": "Google AI Studio"
+    },
+    "q3": {
+      "title": "How to set API Key in Google Colab Notebook?",
+      "step1": "Open the Secrets panel (key icon) in Google Colab.",
+      "step2": "Enable the required variables and fill in their values.",
+      "imageAlt": "Notebook"
+    },
+    "contact": {
+      "prefix": "More questions? Contact the organizers via email",
+      "or": "or via",
+      "telegram": "Telegram"
+    }
+  }
+}

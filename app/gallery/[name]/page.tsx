@@ -1,8 +1,6 @@
-// app/gallery/[name]/page.tsx
 import { Metadata } from "next";
-import Gallery from "@/components/Gallery"; // Adjust the import path as needed
+import Gallery from "@/components/Gallery";
 
-// Generate dynamic metadata for SEO
 export async function generateMetadata({
   params,
 }: {
@@ -11,7 +9,6 @@ export async function generateMetadata({
   const resolvedParams = await params;
   const name = resolvedParams.name;
 
-  // Assume a default bucket name or get it from an environment variable
   const bucketName = "gdg-cloud-hanoi";
   const imageUrl = `https://storage.googleapis.com/${bucketName}/${name}`;
   const title = `Gallery | Build with AI Cloud Hanoi 2025`;
@@ -47,7 +44,6 @@ export async function generateMetadata({
   };
 }
 
-// Server Component for the gallery page
 export default async function GalleryPage({
   params,
 }: {
@@ -56,13 +52,11 @@ export default async function GalleryPage({
   const resolvedParams = await params;
   const name = resolvedParams.name;
 
-  // Assume a default bucket name or get it from an environment variable
   const bucketName = "gdg-cloud-hanoi";
   const imageUrl = `https://storage.googleapis.com/${bucketName}/${name}`;
 
   return (
     <>
-      {/* Structured Data for Image Gallery (JSON-LD) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

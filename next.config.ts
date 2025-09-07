@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
   eslint: {
@@ -13,9 +14,10 @@ const nextConfig: NextConfig = {
       {
         hostname: "lh3.googleusercontent.com",
         protocol: "https",
-      }
+      },
     ],
   },
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin();
+export default withNextIntl(nextConfig);

@@ -5,8 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import "@videojs/http-streaming";
-
-// Since we're having trouble with the exact type, we'll use the return type of videojs
 type VideoJsPlayer = ReturnType<typeof videojs>;
 
 interface HeroVideoProps {

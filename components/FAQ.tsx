@@ -9,17 +9,19 @@ import VideoPlayer from "./Video";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const ease = [0.16, 1, 0.3, 1];
 
 export default function FAQ() {
+  const t = useTranslations();
   return (
     <section id="faq">
       <div className="bg-zinc-50">
         <div className="relative container mx-auto px-4 py-16 max-w-7xl">
           <div className="text-center space-y-4 pb-6 mx-auto">
             <h3 className="mx-auto mt-4 max-w-xs text-2xl font-semibold sm:max-w-none sm:text-4xl md:text-5xl">
-              Hỏi đáp
+              {t("faqSection.title")}
             </h3>
           </div>
           <div className="mx-auto my-12 md:max-w-[800px]">
@@ -34,35 +36,24 @@ export default function FAQ() {
                 className="w-full border rounded-lg bg-white"
               >
                 <AccordionTrigger className="text-start px-4">
-                  Làm sao để nhận Google Cloud credit?
+                  {t("faqSection.q1.title")}
                 </AccordionTrigger>
                 <AccordionContent className="text-justify px-4">
                   <div>
                     <ul className="list-decimal pl-6 space-y-2 text-gray-800">
                       <li className="hover:text-zinc-900 transition-colors">
-                        Truy cập vào đường liên kết trygcp.dev để nhận credit{" "}
-                        <strong>
-                          (BTC sẽ cung cấp đường dẫn cụ thể trong sự kiện)
-                        </strong>
-                        .
+                        {t("faqSection.q1.step1")}
                       </li>
                       <li className="hover:text-zinc-900 transition-colors">
-                        Đăng nhập vào tài khoản Google của bạn sau đó chọn{" "}
-                        <strong className="font-bold">
-                          CLICK HERE TO ACCESS YOUR CREDIT
-                        </strong>
+                        {t("faqSection.q1.step2")}
                       </li>
                       <li className="hover:text-zinc-900 transition-colors">
-                        Chấp nhận điều khoản và điều kiện sau đó nhấn tiếp tục
-                        là hoàn tất.
+                        {t("faqSection.q1.step3")}
                       </li>
                       <li className="hover:text-zinc-900 transition-colors">
-                        Bạn có thể kiểm tra credit của mình bằng cách vào trang{" "}
-                        <strong className="font-bold">Billing</strong>
+                        {t("faqSection.q1.step4.prefix")} <strong className="font-bold">Billing</strong>
                         {" > "}
-                        <strong className="font-bold">
-                          Credits
-                        </strong> trong{" "}
+                        <strong className="font-bold">Credits</strong> {t("faqSection.q1.step4.suffix")} {" "}
                         <a
                           href="https://console.cloud.google.com/"
                           className="text-blue-500 underline"
@@ -82,9 +73,8 @@ export default function FAQ() {
                     >
                       <VideoPlayer
                         hlsSrc="https://storage.googleapis.com/gdg-cloud-hanoi/videos/how-to-get-gcp-credit-bwaic-2025/playlist.m3u8"
-                        // hlsSrc="/videos/credit/playlist.m3u8"
                         thumbnailSrc="/preview.jpg"
-                        thumbnailAlt="Hero Video"
+                        thumbnailAlt={t("faqSection.q1.videoAlt")}
                         className="border rounded-lg shadow-lg max-w-screen-lg"
                       />
                     </motion.div>
@@ -98,32 +88,30 @@ export default function FAQ() {
                 className="w-full border rounded-lg bg-white"
               >
                 <AccordionTrigger className="text-start px-4">
-                  Làm sao để tạo API Key trong Google AI Studio?
+                  {t("faqSection.q2.title")}
                 </AccordionTrigger>
                 <AccordionContent className="text-justify px-4">
                   <div>
                     <ul className="list-decimal pl-6 space-y-2 text-gray-800">
                       <li className="hover:text-zinc-900 transition-colors">
-                        Truy cập{" "}
+                        {t("faqSection.q2.step1")}{" "}
                         <a
                           style={{ fontWeight: "bold" }}
                           href="https://aistudio.google.com/apikey"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          Google AI Studio
+                          {t("faqSection.q2.googleAiStudio")}
                         </a>
                       </li>
                       <li className="hover:text-zinc-900 transition-colors">
-                        Chọn{" "}
-                        <strong className="font-bold">Create API key</strong>.
+                        {t("faqSection.q2.step2")}
                       </li>
                       <li className="hover:text-zinc-900 transition-colors">
-                        Chọn Google Cloud Project (hoặc tạo mới nếu chưa có).
-                        Sau đó nhấn Create.
+                        {t("faqSection.q2.step3")}
                       </li>
                       <li className="hover:text-zinc-900 transition-colors">
-                        Lưu lại API key để sử dụng trong các bài lab.
+                        {t("faqSection.q2.step4")}
                       </li>
                     </ul>
                     <motion.div
@@ -141,7 +129,7 @@ export default function FAQ() {
                         <div className="relative rounded-md p-2 ring-1 ring-slate-200/50 dark:bg-gray-900/70 dark:ring-white/10 backdrop-blur-md">
                           <Image
                             src="/ai_studio.jpg"
-                            alt="Google AI Studio"
+                            alt={t("faqSection.q2.imageAlt")}
                             className="rounded-lg"
                             width={1280}
                             height={720}
@@ -159,16 +147,16 @@ export default function FAQ() {
                 className="w-full border rounded-lg bg-white"
               >
                 <AccordionTrigger className="text-start px-4">
-                  Làm sao cài API Key trong Google Colab Notebook?
+                  {t("faqSection.q3.title")}
                 </AccordionTrigger>
                 <AccordionContent className="text-justify px-4">
                   <div>
                     <ul className="list-decimal pl-6 space-y-2 text-gray-800">
                       <li className="hover:text-zinc-900 transition-colors">
-                        Chọn mục Secret (hình chìa khoá) trong Google Colab.
+                        {t("faqSection.q3.step1")}
                       </li>
                       <li className="hover:text-zinc-900 transition-colors">
-                        Enable biến cần dùng và điền giá trị cho biến đó.
+                        {t("faqSection.q3.step2")}
                       </li>
                     </ul>
                     <motion.div
@@ -186,7 +174,7 @@ export default function FAQ() {
                         <div className="relative rounded-md p-2 ring-1 ring-slate-200/50 dark:bg-gray-900/70 dark:ring-white/10 backdrop-blur-md">
                           <Image
                             src="/notebook.jpg"
-                            alt="Notebook"
+                            alt={t("faqSection.q3.imageAlt")}
                             className="rounded-lg"
                             width={1280}
                             height={720}
@@ -200,13 +188,13 @@ export default function FAQ() {
             </Accordion>
           </div>
           <h4 className="mb-12 text-center text-sm font-medium tracking-tight text-foreground/80">
-            Bạn còn câu hỏi? Hãy liên hệ BTC qua email{" "}
+            {t("faqSection.contact.prefix")} {" "}
             <a href="mailto:hello@gdgcloudhanoi.dev" className="underline">
               hello@gdgcloudhanoi.dev
             </a>{" "}
-            hoặc kênh{" "}
+            {t("faqSection.contact.or")} {" "}
             <a href="https://t.me/GDGCloudHanoi/1" className="underline">
-              Telegram
+              {t("faqSection.contact.telegram")}
             </a>
           </h4>
         </div>

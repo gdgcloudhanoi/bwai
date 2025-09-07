@@ -44,7 +44,7 @@ const Countdown = ({ targetDate, timezone }: CountdownProps) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true); // Mark as mounted on the client
+    setIsMounted(true);
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
@@ -63,7 +63,6 @@ const Countdown = ({ targetDate, timezone }: CountdownProps) => {
     { value: timeLeft.seconds, label: "Giây" },
   ];
 
-  // Render nothing or a placeholder until mounted
   if (!isMounted) {
     return (
       <div className="flex justify-center items-center gap-4 sm:gap-6">

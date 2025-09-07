@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import Countdown from "./Countdown";
 import { TimeWindow } from "./TimeWindow";
 import HeroVideoDialog from "./HeroVideoDialog";
@@ -11,7 +12,6 @@ type ImageProp = {
   alt: string;
 };
 
-// Fisher-Yates shuffle function
 const shuffleArray = (array: ImageProp[]) => {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -22,6 +22,7 @@ const shuffleArray = (array: ImageProp[]) => {
 };
 
 const Hero: React.FC = () => {
+  const t = useTranslations();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -43,7 +44,6 @@ const Hero: React.FC = () => {
     },
   };
 
-  // Original layout with spans (fixed order)
   const layout = [
     { span: "col-span-5 row-span-2" },
     { span: "col-span-3 row-span-2" },
@@ -55,7 +55,6 @@ const Hero: React.FC = () => {
     { span: "col-span-4 row-span-2" },
   ];
 
-  // Image content to shuffle
   const imageContent = Array.from({ length: 8 }, (_, index) => ({
     src: `https://storage.googleapis.com/gdg-cloud-hanoi/bwai25/featured/featured_${
       index + 1
@@ -89,16 +88,14 @@ const Hero: React.FC = () => {
             className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight"
             variants={itemVariants}
           >
-            Build with AI Cloud Hanoi 2025
+            {t("hero.title")}
           </motion.h1>
 
           <motion.p
             className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-md"
             variants={itemVariants}
           >
-            Build with AI Hanoi 2025 mang đến cơ hội học hỏi và thực hành xây
-            dựng các ứng dụng AI tiên tiến, dưới sự hướng dẫn của các chuyên gia
-            đầu ngành.
+            {t("hero.description")}
           </motion.p>
 
           <motion.div
@@ -111,7 +108,7 @@ const Hero: React.FC = () => {
               animationStyle="from-center"
               videoSrc="https://www.youtube.com/embed/qh3NGpYRG3I?si=4rb-zSdDkVK9qxxb"
               thumbnailSrc="/dashboard.png"
-              thumbnailAlt="Hero Video"
+              thumbnailAlt={t("hero.thumbnailAlt")}
               className="border rounded-lg shadow-lg max-w-screen-lg mt-16"
             />
           </motion.div>
@@ -123,7 +120,7 @@ const Hero: React.FC = () => {
           >
             <div className="flex flex-col">
               <p className="font-semibold text-base sm:text-lg text-gray-600 dark:text-gray-300 mb-4">
-                Sự kiện sẽ bắt đầu sau
+                {t("hero.countdownStartsIn")}
               </p>
               <Countdown
                 targetDate="2025-04-05T08:29:59"
@@ -139,7 +136,7 @@ const Hero: React.FC = () => {
           >
             <div className="flex flex-col">
               <p className="font-semibold text-base sm:text-lg text-gray-600 dark:text-gray-300 mb-4">
-                Sự kiện sẽ kết thúc sau
+                {t("hero.countdownEndsIn")}
               </p>
               <Countdown
                 targetDate="2025-04-05T11:59:59"

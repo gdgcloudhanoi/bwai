@@ -5,6 +5,7 @@ import { Play, XIcon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import RecapVideo from "@/components/RecapVideo";
+import { useTranslations } from "next-intl";
 
 type AnimationStyle =
   | "from-bottom"
@@ -72,7 +73,8 @@ export default function HeroVideoDialog({
 }: HeroVideoProps) {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const selectedAnimation = animationVariants[animationStyle];
-
+  const t = useTranslations();
+  
   return (
     <>
       <Button
@@ -80,7 +82,7 @@ export default function HeroVideoDialog({
         onClick={() => setIsVideoOpen(true)}
       >
         <Play className="size-4" />
-        <span>Xem video</span>
+        <span>{t("hero.watchVideo")}</span>
       </Button>
       <AnimatePresence>
         {isVideoOpen && (

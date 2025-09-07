@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 interface GalleryProps {
-  initialName?: string; // Optional prop for the initial image name
+  initialName?: string;
 }
 
 export default function Gallery({ initialName }: GalleryProps) {
@@ -92,7 +92,6 @@ export default function Gallery({ initialName }: GalleryProps) {
 
         setImages(imagesList);
 
-        // If initialName is provided, set the selected image based on it
         if (initialName && !selectedImageIndex) {
           const index = imagesList.findIndex(
             (img) => img.optimizedName === initialName
@@ -213,7 +212,7 @@ export default function Gallery({ initialName }: GalleryProps) {
               >
                 <Image
                   src={`https://storage.googleapis.com/${image.optimizedBucket}/${image.previewName}`}
-                  alt={image.ai_description || image.originalName}
+                  alt={image.ai_description || image.originalName || "GDG Cloud Hanoi"}
                   fill
                   sizes="(max-width: 768px) 33vw, 33vw"
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -241,7 +240,6 @@ export default function Gallery({ initialName }: GalleryProps) {
         )}
       </AnimatePresence>
 
-      {/* Custom Fullscreen Modal */}
       <AnimatePresence>
         {selectedImage && (
           <motion.div
@@ -256,7 +254,6 @@ export default function Gallery({ initialName }: GalleryProps) {
               className="flex flex-col w-full min-h-screen sm:flex-row sm:h-full"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Image Section */}
               <div className="relative w-full sm:w-2/3 sm:h-full bg-black">
                 <Image
                   src={`https://storage.googleapis.com/${selectedImage.optimizedBucket}/${selectedImage.optimizedName}`}
@@ -311,7 +308,6 @@ export default function Gallery({ initialName }: GalleryProps) {
                   )}
               </div>
 
-              {/* Description and Q&A Section */}
               <div className="w-full sm:w-1/3 bg-white p-8 sm:h-full sm:overflow-y-auto">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -333,7 +329,6 @@ export default function Gallery({ initialName }: GalleryProps) {
                     </p>
                   </div>
 
-                  {/* Share Buttons */}
                   <div className="flex gap-2">
                     <div className="flex-1"></div>
                     <Button variant="outline" size="sm" asChild>

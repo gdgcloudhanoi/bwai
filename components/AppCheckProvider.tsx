@@ -1,5 +1,4 @@
-// components/AppCheckProvider.tsx
-"use client"; // Mark as client component
+"use client";
 
 import { useEffect } from "react";
 import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";

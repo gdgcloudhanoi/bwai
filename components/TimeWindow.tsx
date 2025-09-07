@@ -1,4 +1,3 @@
-// components/TimeWindow.tsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -21,7 +20,6 @@ export const TimeWindow: React.FC<TimeWindowProps> = ({
 
   const checkTimeWindow = () => {
     try {
-      // Get current time in specified timezone
       const now = new Date();
       const formatter = new Intl.DateTimeFormat("en-US", {
         timeZone: timezone,
@@ -48,7 +46,6 @@ export const TimeWindow: React.FC<TimeWindowProps> = ({
       const startDateTime = new Date(startTime);
       const endDateTime = new Date(endTime);
 
-      // Check if current time is within the window
       setIsVisible(
         currentDateTime >= startDateTime && currentDateTime < endDateTime
       );
@@ -59,13 +56,8 @@ export const TimeWindow: React.FC<TimeWindowProps> = ({
   };
 
   useEffect(() => {
-    // Check immediately on mount
     checkTimeWindow();
-
-    // Set up interval to check every second (or adjust as needed)
     const interval = setInterval(checkTimeWindow, 1000);
-
-    // Cleanup interval on unmount
     return () => clearInterval(interval);
   }, [startTime, endTime, timezone]);
 

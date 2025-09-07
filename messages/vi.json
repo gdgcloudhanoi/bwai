@@ -1,0 +1,51 @@
+{
+  "en": "English",
+  "vi": "Tiếng Việt",
+  "home": "Trang chủ",
+  "faq": "Hỏi đáp",
+  "gallery": "Thư viện",
+  "hero": {
+    "title": "Build with AI Cloud Hanoi 2025",
+    "description": "Build with AI Hanoi 2025 mang đến cơ hội học hỏi và thực hành xây dựng các ứng dụng AI tiên tiến, dưới sự hướng dẫn của các chuyên gia đầu ngành.",
+    "thumbnailAlt": "Video Giới thiệu",
+    "countdownStartsIn": "Sự kiện sẽ bắt đầu sau",
+    "countdownEndsIn": "Sự kiện sẽ kết thúc sau",
+    "watchVideo": "Recap Video"
+  }
+  ,
+  "faqSection": {
+    "title": "Hỏi đáp",
+    "q1": {
+      "title": "Làm sao để nhận Google Cloud credit?",
+      "step1": "Truy cập vào đường liên kết trygcp.dev để nhận credit (BTC sẽ cung cấp đường dẫn cụ thể trong sự kiện).",
+      "step2": "Đăng nhập vào tài khoản Google của bạn sau đó chọn \"CLICK HERE TO ACCESS YOUR CREDIT\".",
+      "step3": "Chấp nhận điều khoản và điều kiện sau đó nhấn tiếp tục là hoàn tất.",
+      "step4": {
+        "prefix": "Bạn có thể kiểm tra credit của mình bằng cách vào trang",
+        "suffix": "trong",
+        "console": "Google Cloud Console"
+      },
+      "videoAlt": "Hướng dẫn nhận Google Cloud credit"
+    },
+    "q2": {
+      "title": "Làm sao để tạo API Key trong Google AI Studio?",
+      "step1": "Truy cập",
+      "googleAiStudio": "Google AI Studio",
+      "step2": "Chọn \"Create API key\".",
+      "step3": "Chọn Google Cloud Project (hoặc tạo mới nếu chưa có). Sau đó nhấn Create.",
+      "step4": "Lưu lại API key để sử dụng trong các bài lab.",
+      "imageAlt": "Google AI Studio"
+    },
+    "q3": {
+      "title": "Làm sao cài API Key trong Google Colab Notebook?",
+      "step1": "Chọn mục Secret (hình chìa khoá) trong Google Colab.",
+      "step2": "Enable biến cần dùng và điền giá trị cho biến đó.",
+      "imageAlt": "Notebook"
+    },
+    "contact": {
+      "prefix": "Bạn còn câu hỏi? Hãy liên hệ BTC qua email",
+      "or": "hoặc kênh",
+      "telegram": "Telegram"
+    }
+  }
+} 
