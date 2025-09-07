@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Countdown from "./Countdown";
 import { TimeWindow } from "./TimeWindow";
+import HeroVideoDialog from "./HeroVideoDialog";
 
 type ImageProp = {
   src: string;
@@ -56,9 +57,9 @@ const Hero: React.FC = () => {
 
   // Image content to shuffle
   const imageContent = Array.from({ length: 8 }, (_, index) => ({
-    src: `https://storage.googleapis.com/gdg-cloud-hanoi/featured_${
+    src: `https://storage.googleapis.com/gdg-cloud-hanoi/bwai25/featured/featured_${
       index + 1
-    }_preview_optimized.jpg`,
+    }.jpg`,
     alt: `Feature ${index + 1}`,
   }));
 
@@ -99,6 +100,21 @@ const Hero: React.FC = () => {
             dựng các ứng dụng AI tiên tiến, dưới sự hướng dẫn của các chuyên gia
             đầu ngành.
           </motion.p>
+
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 1, ease: "easeInOut" }}
+          >
+            <HeroVideoDialog
+              animationStyle="from-center"
+              videoSrc="https://www.youtube.com/embed/qh3NGpYRG3I?si=4rb-zSdDkVK9qxxb"
+              thumbnailSrc="/dashboard.png"
+              thumbnailAlt="Hero Video"
+              className="border rounded-lg shadow-lg max-w-screen-lg mt-16"
+            />
+          </motion.div>
 
           <TimeWindow
             startTime="2025-04-01T00:00:00"
