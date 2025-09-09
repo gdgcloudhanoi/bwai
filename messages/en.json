@@ -47,5 +47,11 @@
       "or": "or via",
       "telegram": "Telegram"
     }
+  },
+  "browserRequired": {
+    "title": "Open in your browser?",
+    "description": "It looks like you're viewing this inside an in-app browser. For the best experience, open it in your default browser.",
+    "continueHere": "Continue here",
+    "openInBrowser": "Open in browser"
   }
 }

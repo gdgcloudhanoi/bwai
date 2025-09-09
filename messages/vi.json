@@ -47,5 +47,11 @@
       "or": "hoặc kênh",
       "telegram": "Telegram"
     }
+  },
+  "browserRequired": {
+    "title": "Mở bằng trình duyệt?",
+    "description": "Có vẻ bạn đang xem nội dung trong trình duyệt tích hợp của ứng dụng. Để có trải nghiệm tốt nhất, hãy mở bằng trình duyệt mặc định.",
+    "continueHere": "Tiếp tục ở đây",
+    "openInBrowser": "Mở bằng trình duyệt"
   }
 } 

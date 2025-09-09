@@ -5,6 +5,7 @@ import { ScrollProvider } from "@/components/ScrollContext";
 import localFont from "next/font/local";
 import AppCheckProvider from "@/components/AppCheckProvider";
 import { NextIntlClientProvider } from "next-intl";
+import { BrowserRequired } from "@/components/BrowserRequired";
 
 const googleSans = localFont({
   src: [
@@ -74,14 +75,16 @@ export default async function RootLayout({
   return (
     <html>
       <body className={`${googleSans.variable} antialiased`}>
-        <AppCheckProvider>
-          <ScrollProvider>
-            <NextIntlClientProvider>
-              {children}
-              <Toaster />
-            </NextIntlClientProvider>
-          </ScrollProvider>
-        </AppCheckProvider>
+        <NextIntlClientProvider>
+          <BrowserRequired>
+            <AppCheckProvider>
+              <ScrollProvider>
+                {children}
+                <Toaster />
+              </ScrollProvider>
+            </AppCheckProvider>
+          </BrowserRequired>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
