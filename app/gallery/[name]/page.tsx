@@ -8,9 +8,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const resolvedParams = await params;
   const name = resolvedParams.name;
-
-  const bucketName = "gdg-cloud-hanoi";
-  const imageUrl = `https://storage.googleapis.com/${bucketName}/${name}`;
+  const imageUrl = `${process.env.IMAGES_URL}/${name}`;
   const title = `Gallery | Build with AI Cloud Hanoi 2025`;
   const description = `View your images in our gallery.`;
   const canonicalUrl = `${process.env.NEXT_PUBLIC_SITE_URL}gallery/${name}`;
@@ -51,9 +49,7 @@ export default async function GalleryPage({
 }) {
   const resolvedParams = await params;
   const name = resolvedParams.name;
-
-  const bucketName = "gdg-cloud-hanoi";
-  const imageUrl = `https://storage.googleapis.com/${bucketName}/${name}`;
+  const imageUrl = `${process.env.IMAGES_URL}/${name}`;
 
   return (
     <>

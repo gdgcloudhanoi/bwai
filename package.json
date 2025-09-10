@@ -1,13 +1,14 @@
 {
   "name": "buildwithai",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "functions": "firebase deploy --only functions"
+    "functions": "firebase deploy --only functions",
+    "deploy": "firebase deploy --only apphosting"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.3",
