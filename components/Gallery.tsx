@@ -4,7 +4,7 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { firestore } from "@/lib/firebase";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { X, ChevronLeft, ChevronRight, XIcon, Link2Icon } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, XIcon, Link2Icon, DownloadIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -85,6 +85,7 @@ export default function Gallery({ initialName }: GalleryProps) {
     const unsubscribe = onSnapshot(
       imagesQuery,
       (snapshot) => {
+        console.log("snapshot", snapshot);
         const imagesList = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
@@ -99,6 +100,20 @@ export default function Gallery({ initialName }: GalleryProps) {
           if (index !== -1) {
             setSelectedImageIndex(index);
             setSelectedImage(imagesList[index]);
+          }
+        }
+
+        if (selectedImage) {
+          console.log("selectedImageIndex", selectedImageIndex);
+          console.log("selectedImage", selectedImage);
+          const index = imagesList.findIndex(
+            (img) => img.optimizedName === selectedImage.optimizedName
+          );
+          if (index !== -1) {
+            setSelectedImage(imagesList[index]);
+          } else {
+            setSelectedImageIndex(null);
+            setSelectedImage(null);
           }
         }
 
@@ -141,6 +156,27 @@ export default function Gallery({ initialName }: GalleryProps) {
   const handleClose = () => {
     setSelectedImageIndex(null);
     setSelectedImage(null);
+  };
+
+  const handleDownload = async () => {
+    try {
+      if (!selectedImage) return;
+      const url = `https://storage.googleapis.com/${selectedImage.optimizedBucket}/${selectedImage.optimizedName}`;
+      const response = await fetch(url, { mode: "cors" });
+      if (!response.ok) throw new Error("Failed to fetch image");
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = blobUrl;
+      anchor.download = selectedImage.optimizedName || "image";
+      document.body.appendChild(anchor);
+      anchor.click();
+      document.body.removeChild(anchor);
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (err) {
+      console.error(err);
+      toast("Failed to download image");
+    }
   };
 
   const cardVariants = {
@@ -212,7 +248,11 @@ export default function Gallery({ initialName }: GalleryProps) {
               >
                 <Image
                   src={`https://storage.googleapis.com/${image.optimizedBucket}/${image.previewName}`}
-                  alt={image.ai_description || image.originalName || "GDG Cloud Hanoi"}
+                  alt={
+                    image.ai_description ||
+                    image.originalName ||
+                    "GDG Cloud Hanoi"
+                  }
                   fill
                   sizes="(max-width: 768px) 33vw, 33vw"
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -271,7 +311,7 @@ export default function Gallery({ initialName }: GalleryProps) {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute top-4 right-4 text-white hover:bg-white/20 z-10"
+                  className="absolute top-4 right-4 text-white bg-white/20 z-10"
                   onClick={
                     !initialName
                       ? handleClose
@@ -288,7 +328,7 @@ export default function Gallery({ initialName }: GalleryProps) {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:bg-white/20 z-10"
+                      className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white bg-white/5 z-10"
                       onClick={handlePrev}
                     >
                       <ChevronLeft className="h-8 w-8" />
@@ -300,7 +340,7 @@ export default function Gallery({ initialName }: GalleryProps) {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:bg-white/20 z-10"
+                      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-white/5 z-10"
                       onClick={handleNext}
                     >
                       <ChevronRight className="h-6 w-6" />
@@ -308,7 +348,7 @@ export default function Gallery({ initialName }: GalleryProps) {
                   )}
               </div>
 
-              <div className="w-full sm:w-1/3 bg-white p-8 sm:h-full sm:overflow-y-auto">
+              <div className="w-full sm:w-1/3 bg-white p-8 flex-grow sm:flex-grow-0 sm:h-full sm:overflow-y-auto">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -322,12 +362,20 @@ export default function Gallery({ initialName }: GalleryProps) {
                     height={200}
                     className="object-cover rounded-lg mb-8"
                   />
-                  <div>
-                    <p className="text-justify">
-                      {selectedImage.ai_description ||
-                        "No description available"}
-                    </p>
-                  </div>
+
+                  {selectedImage.ai_description ? (
+                    <div>
+                      <p className="text-justify">
+                        {selectedImage.ai_description}
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-2">
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-full" />
+                    </div>
+                  )}
 
                   <div className="flex gap-2">
                     <div className="flex-1"></div>
@@ -380,10 +428,17 @@ export default function Gallery({ initialName }: GalleryProps) {
                     >
                       <Link2Icon className="h-4 w-4" />
                     </Button>
+                    <Button
+                      onClick={handleDownload}
+                      variant="outline"
+                      size="sm"
+                    >
+                      <DownloadIcon className="h-4 w-4" />
+                    </Button>
                   </div>
 
-                  <div>
-                    {selectedImage.qa && selectedImage.qa.length > 0 ? (
+                  {selectedImage.qa && selectedImage.qa.length > 0 ? (
+                    <div>
                       <div className="space-y-2">
                         {selectedImage.qa.map((item, index) => (
                           <Accordion key={index} type="single" collapsible>
@@ -398,13 +453,19 @@ export default function Gallery({ initialName }: GalleryProps) {
                           </Accordion>
                         ))}
                       </div>
-                    ) : (
-                      <p>No Q&A available</p>
-                    )}
-                    <p className="text-end text-sm text-gray-500 mt-8">
-                      Powered by <strong>Gemini 2.5 Flash</strong>
-                    </p>
-                  </div>
+                      <p className="text-end text-sm text-gray-500 mt-8">
+                        Powered by <strong>Gemini 2.5 Flash</strong>
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-2">
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-full" />
+                    </div>
+                  )}
                 </motion.div>
               </div>
             </div>
